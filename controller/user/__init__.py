@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_restful import Api
-from conrtoller.user import passport, profile
+from controller.user import passport, profile
 
 
 user_bp = Blueprint('user', __name__)
