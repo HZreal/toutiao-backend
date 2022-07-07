@@ -1,7 +1,6 @@
 from flask import current_app, g
 from flask_restful import Resource
 from flask_restful.reqparse import RequestParser
-
 from commen.utils import parser
 from commen.utils.decorator import login_required
 from commen.utils.qiniu_storage import upload

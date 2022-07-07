@@ -1,12 +1,9 @@
 from flask import jsonify
-
 from commen.settings.default import DefaultConfig
-from core.app import create_app
+from core.set_app import create_app
 
 
 app = create_app(DefaultConfig)
-
-
 
 
 @app.route('/')

@@ -1,16 +1,41 @@
 from flask import Flask
 from commen.utils.middleware import jwt_auth_middleware
-from controller.user import user_bp
+from services.news import news_bp
+from services.user import user_bp
+
+
 
 
 def create_flask_app(config):
+    """
+    创建flask app，从对象读取基本配置
+    :param config:
+    :return:
+    """
     app = Flask(__name__)
     app.config.from_object(config)
     return app
 
+def declare_blueprint(app: Flask):
+    """
+    注册蓝图
+    :param app:
+    :return:
+    """
+    app.register_blueprint(user_bp, url_prefix='/user')
+    app.register_blueprint(news_bp, url_prefix='/news')
+    # app.register_blueprint(notice_bp, url_prefix='/notice')
+
+
+
+
 
 def create_app(config):
-    # 创建flask app
+    """
+    创建flask app，设置数据库、钩子、日志等相关
+    :param config:
+    :return:
+    """
     app = create_flask_app(config)
 
     # 配置日志
@@ -32,13 +57,8 @@ def create_app(config):
     # 添加请求钩子
     app.before_request(jwt_auth_middleware)
 
-
-
     # 注册蓝图
-    app.register_blueprint(user_bp, url_prefix='/user')
-    # app.register_blueprint()
-    # app.register_blueprint()
-    # app.register_blueprint()
+    declare_blueprint(app)
 
     return app
 
