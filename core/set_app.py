@@ -4,8 +4,6 @@ from services.news import news_bp
 from services.user import user_bp
 
 
-
-
 def create_flask_app(config):
     """
     创建flask app，从对象读取基本配置
@@ -16,6 +14,7 @@ def create_flask_app(config):
     app.config.from_object(config)
     return app
 
+
 def declare_blueprint(app: Flask):
     """
     注册蓝图
@@ -25,9 +24,6 @@ def declare_blueprint(app: Flask):
     app.register_blueprint(user_bp, url_prefix='/user')
     app.register_blueprint(news_bp, url_prefix='/news')
     # app.register_blueprint(notice_bp, url_prefix='/notice')
-
-
-
 
 
 def create_app(config):
@@ -61,9 +57,3 @@ def create_app(config):
     declare_blueprint(app)
 
     return app
-
-
-
-
-
-

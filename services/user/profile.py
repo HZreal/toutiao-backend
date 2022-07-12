@@ -3,7 +3,7 @@ from flask_restful import Resource
 from flask_restful.reqparse import RequestParser
 from commen.utils import parser
 from commen.utils.decorator import login_required
-from commen.utils.qiniu_storage import upload
+from commen.utils.qiniu_storage import upload_to_qiniu
 from model.user import db, User
 from commen.cache.user import UserProfileCache
 
@@ -34,7 +34,7 @@ class PhotoResource(Resource):
         upload_file = req.photo                    # req.photo取出了请求中的文件对象upload_file
         file_data = upload_file.read()             # 通过read方法读取文件的二进制数据
         # 返回保存的文件名
-        file_name = upload(file_data)
+        file_name = upload_to_qiniu(file_data)
 
         # 2. 保存图片的元数据(图片名称、图片路径等)到数据库
         # a. 保存完整的图片路径(包含了域名、路径、文件名)，浪费空间，因为域名路径都一样

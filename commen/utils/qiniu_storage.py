@@ -4,7 +4,7 @@ from flask import current_app
 import qiniu.config
 
 
-def upload(file_data):
+def upload_to_qiniu(file_data):
     """
     上传文件到七牛云服务
     :param file_data: 视图接收到的图片二进制数据
@@ -47,5 +47,5 @@ def upload(file_data):
 if __name__ == '__main__':
     with open('/Users/hz/Desktop/WeChat323b195bcc71489a188da4a087620c69.png', 'rb') as f:
         content = f.read()
-        file_name = upload(content)
+        file_name = upload_to_qiniu(content)
         print(file_name)
